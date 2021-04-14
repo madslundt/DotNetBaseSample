@@ -1,0 +1,11 @@
+bin/
+obj/
+/packages/
+riderModule.iml
+/_ReSharper.Caches/
+/.idea/
+
+# Appsettings
+[Aa]ppsettings.[Pp]roduction.json
+[Aa]ppsettings.[Ss]taging.json
+[Aa]ppsettings.[Dd]evelopment.json

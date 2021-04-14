@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Identity.Web;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -53,6 +54,8 @@ namespace Api
             {
                 app.UseHttpsRedirection();
             }
+            
+            app.UsePathBase(new PathString("/api"));
 
             app.UseRouting();
 

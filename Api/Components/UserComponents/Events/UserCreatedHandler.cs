@@ -7,9 +7,9 @@ namespace Components.UserComponents.Events
 {
     public class UserCreatedHandler
     {
-        public class Handler : IEventHandler<UserCreated>
+        public class Handler : IEventHandler<UserCreatedEvent>
         {
-            public Task Handle(UserCreated notification, CancellationToken cancellationToken)
+            public Task Handle(UserCreatedEvent notification, CancellationToken cancellationToken)
             {
                 throw new System.NotImplementedException();
             }

@@ -3,11 +3,11 @@ using Infrastructure.Events;
 
 namespace Events.UserEvents
 {
-    public class UserCreated : Event
+    public class UserCreatedEvent : Event
     {
         public Guid UserId { get; }
 
-        public UserCreated(Guid userId)
+        public UserCreatedEvent(Guid userId)
         {
             UserId = userId;
         }

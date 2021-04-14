@@ -13,6 +13,9 @@ namespace DataModel.Models.Users.UserStatusRefs
                 b.Property(p => p.Id)
                     .IsRequired();
 
+                b.HasIndex(k => k.Name)
+                    .IsUnique();
+
                 b.HasKey(k => k.Id);
 
                 b.HasData(Enum.GetValues(typeof(UserStatusEnum)).Cast<UserStatusEnum>()

@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Events.UserEvents;
 using Infrastructure.Events;
@@ -11,7 +12,9 @@ namespace Components.UserComponents.Events
         {
             public Task Handle(UserCreatedEvent notification, CancellationToken cancellationToken)
             {
-                throw new System.NotImplementedException();
+                Console.WriteLine($"User created with id '{notification.UserId}'");
+
+                return Task.CompletedTask;
             }
         }
     }

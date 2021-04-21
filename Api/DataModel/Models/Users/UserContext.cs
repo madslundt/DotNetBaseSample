@@ -8,8 +8,7 @@ namespace DataModel.Models.Users
         {
             builder.Entity<User>(b =>
             {
-                b.Property(p => p.Id)
-                    .IsRequired();
+                b.AddBaseModelContext();
 
                 b.Property(p => p.FirstName)
                     .IsRequired();
@@ -19,8 +18,6 @@ namespace DataModel.Models.Users
                     .HasForeignKey(fk => fk.Status)
                     .OnDelete(DeleteBehavior.Restrict)
                     .IsRequired();
-
-                b.HasKey(k => k.Id);
             });
         }
     }

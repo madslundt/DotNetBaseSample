@@ -16,27 +16,15 @@ namespace Api.Filters
     {
         private HttpStatusCode MapStatusCode(Exception ex)
         {
-            // Status Codes
-            if (ex is ArgumentNullException)
+            return ex switch
             {
-                return HttpStatusCode.NotFound;
-            }
-            else if (ex is ValidationException)
-            {
-                return HttpStatusCode.BadRequest;
-            }
-            else if (ex is UnauthorizedAccessException)
-            {
-                return HttpStatusCode.Unauthorized;
-            }
-            else if (ex is DuplicateNameException)
-            {
-                return HttpStatusCode.Conflict;
-            }
-            else
-            {
-                return HttpStatusCode.InternalServerError;
-            }
+                ArgumentException => HttpStatusCode.NotFound,
+                ValidationException => HttpStatusCode.BadRequest,
+                UnauthorizedAccessException => HttpStatusCode.Unauthorized,
+                NotSupportedException => HttpStatusCode.MethodNotAllowed,
+                DuplicateNameException => HttpStatusCode.Conflict,
+                _ => HttpStatusCode.InternalServerError
+            };
         }
 
         private readonly IWebHostEnvironment _env;

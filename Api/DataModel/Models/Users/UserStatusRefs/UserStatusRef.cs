@@ -2,8 +2,8 @@
 {
     public class UserStatusRef
     {
-        public UserStatusEnum Id { get; set; }
-        public string Name { get; set; }
+        public UserStatusEnum Id { get; }
+        public string Name { get; }
 
         public UserStatusRef(UserStatusEnum status)
         {

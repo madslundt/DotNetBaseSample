@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace DataModel.Models.Users.UserStatusRefs
 {
@@ -10,16 +8,7 @@ namespace DataModel.Models.Users.UserStatusRefs
         {
             builder.Entity<UserStatusRef>(b =>
             {
-                b.Property(p => p.Id)
-                    .IsRequired();
-
-                b.HasIndex(k => k.Name)
-                    .IsUnique();
-
-                b.HasKey(k => k.Id);
-
-                b.HasData(Enum.GetValues(typeof(UserStatusEnum)).Cast<UserStatusEnum>()
-                    .Select(userStatus => new UserStatusRef(userStatus)).ToArray());
+                b.AddBaseModelEnumExtensions<UserStatusRef, UserStatusEnum>();
             });
         }
     }

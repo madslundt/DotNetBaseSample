@@ -1,14 +1,9 @@
 ﻿namespace DataModel.Models.Users.UserStatusRefs
 {
-    public class UserStatusRef
+    public class UserStatusRef : BaseModelEnum<UserStatusEnum>
     {
-        public UserStatusEnum Id { get; }
-        public string Name { get; }
-
-        public UserStatusRef(UserStatusEnum status)
+        public UserStatusRef(UserStatusEnum baseModelEnum) : base(baseModelEnum)
         {
-            Id = status;
-            Name = status.ToString();
         }
     }
 }

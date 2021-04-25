@@ -15,7 +15,7 @@ namespace DataModel.Models.Users
 
                 b.HasOne(r => r.StatusRef)
                     .WithMany()
-                    .HasForeignKey(fk => fk.Status)
+                    .HasForeignKey(fk => fk.StatusEnum)
                     .OnDelete(DeleteBehavior.Restrict)
                     .IsRequired();
             });

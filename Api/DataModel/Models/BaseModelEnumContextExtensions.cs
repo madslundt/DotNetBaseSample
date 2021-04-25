@@ -12,6 +12,9 @@ namespace DataModel.Models
         {
             builder.Property(p => p.Id)
                 .IsRequired();
+                
+            builder.Property(p => p.Name)
+                .IsRequired();
 
             builder.HasIndex(k => k.Name)
                 .IsUnique();

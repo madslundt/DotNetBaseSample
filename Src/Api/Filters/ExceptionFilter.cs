@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace Api.Filters
 {
@@ -26,10 +27,14 @@ namespace Api.Filters
         }
 
         private readonly IWebHostEnvironment _env;
+        private readonly ILogger<ExceptionFilter> _logger;
 
-        public ExceptionFilter(IWebHostEnvironment env)
+        public ExceptionFilter(
+            IWebHostEnvironment env,
+            ILogger<ExceptionFilter> logger)
         {
             _env = env;
+            _logger = logger;
         }
 
         public void OnException(ExceptionContext context)
@@ -48,7 +53,7 @@ namespace Api.Filters
 
                 var statusCode = (int) MapStatusCode(context.Exception);
 
-                // LogError(context, statusCode);
+                LogError(context, statusCode);
 
                 context.Result = new ObjectResult(content);
                 context.HttpContext.Response.StatusCode = statusCode;
@@ -56,26 +61,26 @@ namespace Api.Filters
             }
         }
 
-        // private void LogError(ExceptionContext context, int statusCode)
-        // {
-        //     var logTitle = $"{context.HttpContext.Request.Path} :: [{statusCode}] {context.Exception.Message}";
-        //     var logError = new
-        //     {
-        //         Context = context,
-        //     };
-        //
-        //     if (statusCode >= 500)
-        //     {
-        //         _logger.LogCritical(logTitle, logError);
-        //     }
-        //     else if (statusCode == 404 || statusCode == 401)
-        //     {
-        //         _logger.LogInformation(logTitle, logError);
-        //     }
-        //     else
-        //     {
-        //         _logger.LogWarning(logTitle, logError);
-        //     }
-        // }
+        private void LogError(ExceptionContext context, int statusCode)
+        {
+            var logTitle = $"{context.HttpContext.Request.Path} :: [{statusCode}] {context.Exception.Message}";
+            var logError = new
+            {
+                Context = context,
+            };
+
+            if (statusCode >= 500)
+            {
+                _logger.LogCritical(logTitle, logError);
+            }
+            else if (statusCode == 404 || statusCode == 401)
+            {
+                _logger.LogInformation(logTitle, logError);
+            }
+            else
+            {
+                _logger.LogWarning(logTitle, logError);
+            }
+        }
     }
 }

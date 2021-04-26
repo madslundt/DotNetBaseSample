@@ -38,11 +38,11 @@ namespace DataModel
 
         public async Task<int> SaveChangesAsync(IEvent @event, CancellationToken cancellationToken = default)
         {
-            await using var transaction = await Database.BeginTransactionAsync(cancellationToken);
+            // await using var transaction = await Database.BeginTransactionAsync(cancellationToken);
             var result = await base.SaveChangesAsync(cancellationToken);
             await _eventBus.Commit(@event);
                 
-            await transaction.CommitAsync(cancellationToken);
+            // await transaction.CommitAsync(cancellationToken);
 
             return result;
         }

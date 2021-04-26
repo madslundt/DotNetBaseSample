@@ -7,7 +7,6 @@ using Infrastructure.Mediator;
 using Infrastructure.Swagger;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,7 +26,8 @@ namespace Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // services.AddDbContext<DatabaseContext>(options => options.UseInMemoryDatabase(Configuration.GetConnectionString(ConnectionStringKeys.Api)));
+            // Use different database provider
+            // services.AddDbContext<DatabaseContext>(options => options.UseXX(Configuration.GetConnectionString(ConnectionStringKeys.Api)));
             services.AddDbContext<DatabaseContext>(options => options.UseInMemoryDatabase(ConnectionStringKeys.Api));
 
             services.AddMediator<ExceptionFilter>(typeof(Startup), typeof(ComponentsExtensions), typeof(DatabaseContext), typeof(EventsExtensions))
@@ -48,12 +48,10 @@ namespace Api
             {
                 app.UseHttpsRedirection();
             }
-            
-            app.UsePathBase(new PathString("/api"));
 
             app.UseRouting();
 
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            app.UseEndpoints(endpoints => { endpoints.MapDefaultControllerRoute(); });
             
             app.UseSwaggerDoc();
         }

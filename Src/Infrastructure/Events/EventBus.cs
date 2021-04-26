@@ -15,7 +15,7 @@ namespace Infrastructure.Events
 
         public Task Enqueue(params IEvent[] events)
         {
-            throw new NotImplementedException();
+            
         }
 
         public virtual async Task Commit(params IEvent[] events)
@@ -28,20 +28,6 @@ namespace Infrastructure.Events
 
         private async Task Commit(IEvent @event)
         {
-            // TODO
-            // if (_outboxListener != null)
-            // {
-            //     await _outboxListener.Commit(@event);
-            // }
-            // else if (_eventListener != null)
-            // {
-            //     await _eventListener.Publish(@event);
-            // }
-            // else
-            // {
-            //     throw new ArgumentNullException("No event listener found");
-            // }
-            
             await _mediator.Publish(@event);
         }
     }

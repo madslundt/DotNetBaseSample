@@ -24,13 +24,16 @@ namespace Infrastructure.Mediator
             services.AddScoped<IEventBus, EventBus>();
 
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
-            // services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LogPreProcessor<>));
-            // services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LogPostProcessor<,>));
+            services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
             
             var assemblies = types.Select(type => type.Assembly).ToList();
 
             services
-                .AddControllers(opt => { opt.Filters.Add<TFilterMetadata>(); })
+                .AddControllers(opt =>
+                {
+                    opt.Filters.Add<TFilterMetadata>();
+                    opt.SuppressAsyncSuffixInActionNames = false;
+                })
                 .AddFluentValidation(cfg => { cfg.RegisterValidatorsFromAssemblies(assemblies); })
                 .AddNewtonsoftJson();
 

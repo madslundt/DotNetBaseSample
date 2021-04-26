@@ -2,15 +2,12 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
-        <UserSecretsId>aspnet-Api-6A0E0718-2C16-4E9E-860B-25B338D27D12</UserSecretsId>
-        <LangVersion>9</LangVersion>
+        <UserSecretsId>aspnet-Api-4A01FBE0-ABFE-4143-8193-CD1078D1FD49</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="CorrelationId" Version="3.0.0" />
-        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.14" />
-        <PackageReference Include="Microsoft.Identity.Web" Version="1.1.0" />
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.AzureADB2C.UI" Version="3.1.14" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.14" />
     </ItemGroup>
 
     <ItemGroup>

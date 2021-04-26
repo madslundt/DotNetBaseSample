@@ -13,7 +13,7 @@ namespace DataModel
     {
         private readonly IEventBus _eventBus;
 
-        public DatabaseContext(DbContextOptions<DatabaseContext> options, IEventBus eventBus) : base(options)
+        public DatabaseContext(DbContextOptions<DatabaseContext> options, IEventBus eventBus = null) : base(options)
         {
             _eventBus = eventBus;
         }

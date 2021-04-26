@@ -11,7 +11,11 @@ namespace Infrastructure.Events
         public EventBus(IMediator mediator)
         {
             _mediator = mediator ?? throw new Exception($"Missing dependency '{nameof(IMediator)}'");
-            ;
+        }
+
+        public Task Enqueue(params IEvent[] events)
+        {
+            throw new NotImplementedException();
         }
 
         public virtual async Task Commit(params IEvent[] events)

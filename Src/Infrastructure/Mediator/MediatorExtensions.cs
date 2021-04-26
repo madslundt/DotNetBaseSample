@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Linq;
 using FluentValidation.AspNetCore;
+using Infrastructure.Commands;
+using Infrastructure.Events;
 using Infrastructure.MediatorPipelines;
+using Infrastructure.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,20 +17,22 @@ namespace Infrastructure.Mediator
             params Type[] types)
             where TFilterMetadata : IFilterMetadata
         {
-            var assemblies = types.Select(type => type.Assembly).ToList();
-
-            foreach (var assembly in assemblies)
-            {
-                services.AddMediatR(assembly);
-            }
+            services.AddMediatR(types);
+            
+            services.AddScoped<ICommandBus, CommandBus>();
+            services.AddScoped<IQueryBus, QueryBus>();
+            services.AddScoped<IEventBus, EventBus>();
 
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
-            services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LogPreProcessor<>));
-            services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LogPostProcessor<,>));
+            // services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LogPreProcessor<>));
+            // services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LogPostProcessor<,>));
+            
+            var assemblies = types.Select(type => type.Assembly).ToList();
 
             services
-                .AddMvc(opt => { opt.Filters.Add<TFilterMetadata>(); })
-                .AddFluentValidation(cfg => { cfg.RegisterValidatorsFromAssemblies(assemblies); });
+                .AddControllers(opt => { opt.Filters.Add<TFilterMetadata>(); })
+                .AddFluentValidation(cfg => { cfg.RegisterValidatorsFromAssemblies(assemblies); })
+                .AddNewtonsoftJson();
 
             return services;
         }

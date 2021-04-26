@@ -1,24 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Api.Filters;
+using Api.Infrastructure.OptionKeys;
 using Components;
+using DataModel;
+using Events;
 using Infrastructure.Mediator;
 using Infrastructure.Swagger;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Identity.Web;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
 
 namespace Api
 {
@@ -34,9 +27,10 @@ namespace Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-            
-            services.AddMediator<ExceptionFilter>(typeof(ComponentsExtensions), typeof(Startup))
+            // services.AddDbContext<DatabaseContext>(options => options.UseInMemoryDatabase(Configuration.GetConnectionString(ConnectionStringKeys.Api)));
+            services.AddDbContext<DatabaseContext>(options => options.UseInMemoryDatabase(ConnectionStringKeys.Api));
+
+            services.AddMediator<ExceptionFilter>(typeof(Startup), typeof(ComponentsExtensions), typeof(DatabaseContext), typeof(EventsExtensions))
                 // .AddAuth(Configuration)
                 .AddSwaggerDoc()
                 .AddComponents(Configuration);

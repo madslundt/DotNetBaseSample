@@ -6,6 +6,9 @@
         public TEnum Id { get; }
         public string Name { get; }
 
+        public BaseModelEnum()
+        {}
+
         public BaseModelEnum(TEnum baseModelEnum)
         {
             Id = baseModelEnum;

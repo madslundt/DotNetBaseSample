@@ -35,7 +35,12 @@ namespace Api.Controllers
         [HttpPost]
         public async Task<ActionResult<CreateUser.Result>> CreateUser([FromBody] CreateUser.Command user)
         {
-            var result = await _commandBus.Send(user);
+            var result = await _commandBus.Send(new CreateUser.Command
+            {
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName
+            });
             
             return CreatedAtAction(nameof(GetUser), new { id = result.Id });
         }

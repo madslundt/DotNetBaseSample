@@ -1,5 +1,5 @@
-# NetCoreBaseSample
-Template to get started with a simple .NET Core API including CQRS and event-based models.
+# DotNetBaseSample
+Template to get started with a simple .NET 5 API including CQRS and event-based models.
 
 Src has been split into several projects:
  - **Api**: Api entry point containing controllers and configurations.

@@ -6,7 +6,7 @@ namespace Infrastructure.MessageBrokers
     {
         public static string GetTypeName(Type type)
         {
-            var name = type.FullName.ToLower().Replace("+", ".");
+            var name = type?.FullName?.ToLower().Replace("+", ".");
 
             return name;
         }

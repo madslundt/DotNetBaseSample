@@ -42,6 +42,6 @@ Also, it makes sure to populate the enum values into the table once created.
 `DatabaseContext.cs` contain all the models and makes sure that an event is published once executing `SaveChangesAsync`.
 
 ## Infrastructure
-Infrastructure contains configuration and helper functions to keep hidden fra the API. It makes it way easier to read `Startup.cs` when every addition is referred to as a function.
+Infrastructure contains configuration and helper functions to keep hidden from the API. It makes it way easier to read `Startup.cs` when every addition is referred to as a function.
 
 The reason this is a project in the solution and not a Nuget dependency is that it becomes a lot more transparent and possible to change in case it's needed.

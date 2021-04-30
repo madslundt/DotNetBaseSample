@@ -31,7 +31,7 @@ namespace Infrastructure.BackgroundWorkers
             return services;
         }
 
-        public static IApplicationBuilder UseBackgroundWorkerUI(this IApplicationBuilder app, HangfireOptions options)
+        public static IApplicationBuilder UseBackgroundWorkerUi(this IApplicationBuilder app, HangfireOptions options)
         {
             app.UseHangfireDashboard(options.Path, options);
 

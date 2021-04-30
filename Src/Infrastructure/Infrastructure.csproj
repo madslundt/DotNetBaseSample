@@ -6,6 +6,7 @@
 
     <ItemGroup>
       <PackageReference Include="FluentValidation.AspNetCore" Version="10.0.4" />
+      <PackageReference Include="Hangfire.AspNetCore" Version="1.7.22" />
       <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
       <PackageReference Include="Microsoft.AspNetCore.Authentication.AzureADB2C.UI" Version="5.0.5" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.5" />
